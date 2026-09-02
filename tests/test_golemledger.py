@@ -760,7 +760,7 @@ class CountTally(Base):
 class KeyReuse(Base):
     """An idempotency key is **global**, not scoped to (account, unit).
 
-    Found by adversarial verification of S5 (docs/evidence/kuber_census_ledger):
+    Found by adversarial verification of the census-ledger consumer:
     `post_count` used to accept a key already spent on a different request,
     return the *original* posting, and credit 0. A tally that grew a second unit
     therefore recorded nothing while reporting success. Reuse under a different
