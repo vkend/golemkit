@@ -1,0 +1,32 @@
+{
+  "_note": "ESTIMATE. Public list prices as understood on the fetch date below; NOT fetched from a billing API and NOT verified against an invoice. Verify against current pricing before quoting any usd figure. A wrong entry here changes every `tok` and `usd_micro` in the ledger and nothing will notice.",
+  "_fetched": "2026-09-02",
+  "_source": "public list pricing, from model knowledge; no network call was made",
+  "_units": {
+    "usd_micro_per_token": "millionths of a US dollar per token; $3/MTok == 3 usd_micro/token",
+    "weight": "billable-equivalent multiplier used to compute `tok`, normalised so that 1 tok == 1 token of `reference_usd_micro_per_token` input. Currently weight == usd_micro_per_token / reference, i.e. `tok` and `usd_micro` are proportional; they are stored separately so a future non-price weighting can diverge without a schema change."
+  },
+  "reference_usd_micro_per_token": 3.0,
+  "classes": ["input", "cache_create_1h", "cache_create_5m", "cache_read", "output"],
+  "class_multipliers": {
+    "_note": "multiplier on the model's INPUT price. cache writes cost more than a plain input token; cache reads cost ~10x less; output is priced separately per model and is NOT derived from this table.",
+    "input": 1.0,
+    "cache_create_1h": 2.0,
+    "cache_create_5m": 1.25,
+    "cache_read": 0.1
+  },
+  "models": {
+    "_default": {
+      "_note": "unknown models are priced as the mid tier so an unrecognised model is never silently free.",
+      "input_usd_micro_per_token": 3.0,
+      "output_usd_micro_per_token": 15.0
+    },
+    "claude-opus-5": {"input_usd_micro_per_token": 15.0, "output_usd_micro_per_token": 75.0},
+    "claude-opus-4-7": {"input_usd_micro_per_token": 15.0, "output_usd_micro_per_token": 75.0},
+    "claude-fable-5": {"input_usd_micro_per_token": 15.0, "output_usd_micro_per_token": 75.0},
+    "claude-fable-5-1": {"input_usd_micro_per_token": 15.0, "output_usd_micro_per_token": 75.0},
+    "claude-sonnet-5": {"input_usd_micro_per_token": 3.0, "output_usd_micro_per_token": 15.0},
+    "claude-haiku-4-5-20251001": {"input_usd_micro_per_token": 1.0, "output_usd_micro_per_token": 5.0},
+    "<synthetic>": {"input_usd_micro_per_token": 0.0, "output_usd_micro_per_token": 0.0}
+  }
+}
